@@ -1,32 +1,9 @@
 package com.lhx.goodchoiceoj.controller;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.lhx.goodchoiceoj.common.BaseResponse;
-import com.lhx.goodchoiceoj.common.ErrorCode;
-import com.lhx.goodchoiceoj.common.ResultUtils;
-import com.lhx.goodchoiceoj.exception.BusinessException;
-import com.lhx.goodchoiceoj.model.dto.questionsubmit.QuestionSubmitAddRequest;
-import com.lhx.goodchoiceoj.model.dto.questionsubmit.QuestionSubmitQueryRequest;
-import com.lhx.goodchoiceoj.model.entity.QuestionSubmit;
-import com.lhx.goodchoiceoj.model.entity.User;
-import com.lhx.goodchoiceoj.model.vo.QuestionSubmitVO;
-import com.lhx.goodchoiceoj.service.PostThumbService;
-import com.lhx.goodchoiceoj.service.QuestionSubmitService;
-import com.lhx.goodchoiceoj.service.UserService;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-
 /**
  * 题目提交接口
  *
- * @author <a href="https://github.com/lilhx">程序员鱼皮</a>
- * @from <a href="https://lhx.icu">编程导航知识星球</a>
+ * @author 梁浩轩
  */
 //@RestController
 //@RequestMapping("/question_submit")

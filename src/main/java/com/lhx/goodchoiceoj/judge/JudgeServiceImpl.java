@@ -14,6 +14,7 @@ import com.lhx.goodchoiceoj.model.dto.question.JudgeCase;
 import com.lhx.goodchoiceoj.judge.codesandbox.model.JudgeInfo;
 import com.lhx.goodchoiceoj.model.entity.Question;
 import com.lhx.goodchoiceoj.model.entity.QuestionSubmit;
+import com.lhx.goodchoiceoj.model.enums.CodeSandboxRunStatusEnum;
 import com.lhx.goodchoiceoj.model.enums.JudgeInfoMessageEnum;
 import com.lhx.goodchoiceoj.model.enums.QuestionSubmitStatusEnum;
 import com.lhx.goodchoiceoj.service.QuestionService;
@@ -80,7 +81,11 @@ public class JudgeServiceImpl implements JudgeService {
                 .inputList(inputList)
                 .build();
         ExecuteCodeResponse executeCodeResponse = codeSandbox.executeCode(executeCodeRequest);
-        List<String> outputList = executeCodeResponse.getOutputList().stream().map(str -> str.substring(0, str.length() - 1)).collect(Collectors.toList());
+
+        List<String> outputList = null;
+        if (executeCodeResponse.getStatus() != CodeSandboxRunStatusEnum.COMPILE_FAILED.getValue()) {
+            outputList = executeCodeResponse.getOutputList().stream().map(str -> str.substring(0, str.length() - 1)).collect(Collectors.toList());
+        }
         // 5）根据沙箱的执行结果，设置题目的判题状态和信息
         JudgeContext judgeContext = new JudgeContext();
         judgeContext.setJudgeInfo(executeCodeResponse.getJudgeInfo());
