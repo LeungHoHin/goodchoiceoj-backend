@@ -12,7 +12,6 @@ import com.lhx.goodchoiceoj.rabbitMQ.InitRabbitMq;
  *
  * @author 梁浩轩
  */
-// todo 如需开启 Redis，须移除 exclude 中的内容
 @SpringBootApplication
 @MapperScan("com.lhx.goodchoiceoj.mapper")
 @EnableScheduling
@@ -20,7 +19,7 @@ import com.lhx.goodchoiceoj.rabbitMQ.InitRabbitMq;
 public class MainApplication {
 
     public static void main(String[] args) {
-        InitRabbitMq.doInit();
+        //InitRabbitMq.doInit();
         SpringApplication.run(MainApplication.class, args);
     }
 

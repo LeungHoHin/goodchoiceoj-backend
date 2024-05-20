@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lhx.goodchoiceoj.model.dto.question.QuestionQueryRequest;
 import com.lhx.goodchoiceoj.model.entity.Question;
-import com.lhx.goodchoiceoj.model.entity.Question;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.lhx.goodchoiceoj.model.vo.QuestionVO;
 

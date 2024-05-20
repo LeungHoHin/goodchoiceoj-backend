@@ -16,7 +16,10 @@ public class RemoteSandbox implements CodeSandbox {
 
     private static final String AUTH_REQUEST_SECRET = "LeungHohin";
 
-    private static final String REMOTE_SANDBOX_URL = "http://192.168.126.132:8090/executeCode";
+//    private static final String REMOTE_SANDBOX_URL = "http://192.168.126.132:8091/executeCode";
+
+    private static final String REMOTE_SANDBOX_URL = "http://106.53.68.162:8091/executeCode";
+
 
     @Override
     public ExecuteCodeResponse executeCode(ExecuteCodeRequest executeRequest) {

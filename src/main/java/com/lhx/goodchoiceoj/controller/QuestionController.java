@@ -180,7 +180,7 @@ public class QuestionController {
         }
         JudgeConfig judgeConfig = questionUpdateRequest.getJudgeConfig();
         if (judgeCase != null) {
-            question.setJudgeCase(GSON.toJson(judgeConfig));
+            question.setJudgeConfig(GSON.toJson(judgeConfig));
         }
         // 参数校验
         questionService.validQuestion(question, false);
@@ -327,11 +327,23 @@ public class QuestionController {
         // 从数据库中查询原始的题目提交分页信息
         Page<QuestionSubmit> questionSubmitPage = questionSubmitService.page(new Page<>(current, size),
                 questionSubmitService.getQueryWrapper(questionSubmitQueryRequest));
+        // 返回脱敏信息
+        return ResultUtils.success(questionSubmitService.getQuestionSubmitVOPage(questionSubmitPage, null));
+    }
+
+    @PostMapping("/my/question_submit/list/page")
+    public BaseResponse<Page<QuestionSubmitVO>> listMyQuestionSubmitByPage(@RequestBody QuestionSubmitQueryRequest questionSubmitQueryRequest,
+                                                                           HttpServletRequest request) {
+        long current = questionSubmitQueryRequest.getCurrent();
+        long size = questionSubmitQueryRequest.getPageSize();
+        // 从数据库中查询原始的题目提交分页信息
         final User loginUser = userService.getLoginUser(request);
+        questionSubmitQueryRequest.setUserId(loginUser.getId());
+        Page<QuestionSubmit> questionSubmitPage = questionSubmitService.page(new Page<>(current, size),
+                questionSubmitService.getQueryWrapper(questionSubmitQueryRequest));
         // 返回脱敏信息
         return ResultUtils.success(questionSubmitService.getQuestionSubmitVOPage(questionSubmitPage, loginUser));
     }
-
 
 
 }

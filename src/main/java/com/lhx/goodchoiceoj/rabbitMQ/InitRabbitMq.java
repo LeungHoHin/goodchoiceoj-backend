@@ -14,7 +14,16 @@ public class InitRabbitMq {
     public static void doInit() {
         try {
             ConnectionFactory factory = new ConnectionFactory();
-            factory.setHost("localhost");
+            factory.setHost("106.53.68.162");
+            factory.setPort(5672);  // 一般默认端口为5672
+            factory.setUsername("LiangHaoxuan");
+            factory.setPassword("Lhx20021030!");
+            factory.setAutomaticRecoveryEnabled(true);  // 开启Connection自动恢复功能
+            factory.setNetworkRecoveryInterval(5000);
+            factory.setVirtualHost("/");
+            factory.setConnectionTimeout(30 * 1000);
+            factory.setHandshakeTimeout(30 * 1000);
+            factory.setShutdownTimeout(0);
             Connection connection = factory.newConnection();
             Channel channel = connection.createChannel();
             String EXCHANGE_NAME = "code_exchange";

@@ -25,10 +25,11 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
-import com.lhx.goodchoiceoj.rabbitMQ.MyMessageProducer;
+//import com.lhx.goodchoiceoj.rabbitMQ.MyMessageProducer;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 /**
@@ -49,8 +50,8 @@ public class QuestionSubmitServiceImpl extends ServiceImpl<QuestionSubmitMapper,
     @Lazy
     private JudgeService judgeService;
 
-    @Resource
-    private MyMessageProducer myMessageProducer;
+//    @Resource
+//    private MyMessageProducer myMessageProducer;
     /**
      * 提交题目
      *
@@ -89,11 +90,11 @@ public class QuestionSubmitServiceImpl extends ServiceImpl<QuestionSubmitMapper,
         }
         Long questionSubmitId = questionSubmit.getId();
         // 发送消息
-        myMessageProducer.sendMessage("code_exchange", "my_routingKey", String.valueOf(questionSubmitId));
+//        myMessageProducer.sendMessage("code_exchange", "my_routingKey", String.valueOf(questionSubmitId));
 //        // 执行判题服务
-//        CompletableFuture.runAsync(() -> {
-//            judgeService.doJudge(questionSubmitId);
-//        });
+        CompletableFuture.runAsync(() -> {
+            judgeService.doJudge(questionSubmitId);
+        });
         return questionSubmitId;
     }
 
@@ -132,10 +133,12 @@ public class QuestionSubmitServiceImpl extends ServiceImpl<QuestionSubmitMapper,
     public QuestionSubmitVO getQuestionSubmitVO(QuestionSubmit questionSubmit, User loginUser) {
         QuestionSubmitVO questionSubmitVO = QuestionSubmitVO.objToVo(questionSubmit);
         // 脱敏：仅本人和管理员能看见自己（提交 userId 和登录用户 id 不同）提交的代码
-        long userId = loginUser.getId();
-        // 处理脱敏
-        if (userId != questionSubmit.getUserId() && !userService.isAdmin(loginUser)) {
-            questionSubmitVO.setCode(null);
+        if (loginUser != null){
+            long userId = loginUser.getId();
+            // 处理脱敏
+            if (userId != questionSubmit.getUserId() && !userService.isAdmin(loginUser)) {
+                questionSubmitVO.setCode(null);
+            }
         }
         return questionSubmitVO;
     }
