@@ -39,7 +39,24 @@ public class JavaLanguageJudgeStrategy implements JudgeStrategy {
         JudgeInfo judgeInfoResponse = new JudgeInfo();
         judgeInfoResponse.setMemory(memory);
         judgeInfoResponse.setTime(time);
-        //先判断代码是否编译错误
+        // 先判断题目限制
+        String judgeConfigStr = question.getJudgeConfig();
+        JudgeConfig judgeConfig = JSONUtil.toBean(judgeConfigStr, JudgeConfig.class);
+        Long needMemoryLimit = judgeConfig.getMemoryLimit();
+        Long needTimeLimit = judgeConfig.getTimeLimit();
+        if (memory > needMemoryLimit * 1024 * 1024) {
+            judgeInfoMessageEnum = JudgeInfoMessageEnum.MEMORY_LIMIT_EXCEEDED;
+            judgeInfoResponse.setMessage(judgeInfoMessageEnum.getValue());
+            return judgeInfoResponse;
+        }
+        // Java 程序本身需要额外执行 2 秒钟
+        long JAVA_PROGRAM_TIME_COST = 2000L;
+        if ((time - JAVA_PROGRAM_TIME_COST) > needTimeLimit) {
+            judgeInfoMessageEnum = JudgeInfoMessageEnum.TIME_LIMIT_EXCEEDED;
+            judgeInfoResponse.setMessage(judgeInfoMessageEnum.getValue());
+            return judgeInfoResponse;
+        }
+        //判断代码是否编译错误
         if (Objects.equals(status, CodeSandboxRunStatusEnum.COMPILE_FAILED.getValue())) {
             judgeInfoMessageEnum = JudgeInfoMessageEnum.COMPILE_ERROR;
             judgeInfoResponse.setMessage(judgeInfoMessageEnum.getValue());
@@ -59,23 +76,6 @@ public class JavaLanguageJudgeStrategy implements JudgeStrategy {
                 judgeInfoResponse.setMessage(judgeInfoMessageEnum.getValue());
                 return judgeInfoResponse;
             }
-        }
-        // 判断题目限制
-        String judgeConfigStr = question.getJudgeConfig();
-        JudgeConfig judgeConfig = JSONUtil.toBean(judgeConfigStr, JudgeConfig.class);
-        Long needMemoryLimit = judgeConfig.getMemoryLimit();
-        Long needTimeLimit = judgeConfig.getTimeLimit();
-        if (memory > needMemoryLimit * 1024 * 1024) {
-            judgeInfoMessageEnum = JudgeInfoMessageEnum.MEMORY_LIMIT_EXCEEDED;
-            judgeInfoResponse.setMessage(judgeInfoMessageEnum.getValue());
-            return judgeInfoResponse;
-        }
-        // Java 程序本身需要额外执行 10 秒钟
-        long JAVA_PROGRAM_TIME_COST = 10000L;
-        if ((time - JAVA_PROGRAM_TIME_COST) > needTimeLimit) {
-            judgeInfoMessageEnum = JudgeInfoMessageEnum.TIME_LIMIT_EXCEEDED;
-            judgeInfoResponse.setMessage(judgeInfoMessageEnum.getValue());
-            return judgeInfoResponse;
         }
         judgeInfoResponse.setMessage(judgeInfoMessageEnum.getValue());
         return judgeInfoResponse;
