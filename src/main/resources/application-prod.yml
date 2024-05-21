@@ -3,13 +3,14 @@ spring:
   rabbitmq:
     host: 106.53.68.162
     port: 5672
-    password: LiangHaoxuan
+    password: LiangHaoxuanAdmin
     username: Lhx20021030!
+    virtual-host: /
   application:
     name: goodchoiceoj-backend
   # 默认 dev 环境
-  profiles:
-    active: dev
+  #  profiles:
+  #    active: dev
   # 支持 swagger3
   mvc:
     pathmatch:
@@ -30,7 +31,12 @@ spring:
     database: 1
     host: 106.53.68.162
     port: 6379
-    timeout: 5000
+    timeout: 50000
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
     password: Lhx20021030!
   servlet:
     multipart:
