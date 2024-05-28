@@ -4,6 +4,9 @@
 线上地址：<http://goodchoiceoj.cn/>（还在备案中）
           <http://106.53.68.162/>
 
+代码沙箱源码地址：<https://github.com/LeungHoHin/goodchoiceoj-code-sandbox>
+前端源码地址：<https://github.com/LeungHoHin/goodchoiceoj-frontend>
+
 ## 模板特点
 
 ### 技术栈
