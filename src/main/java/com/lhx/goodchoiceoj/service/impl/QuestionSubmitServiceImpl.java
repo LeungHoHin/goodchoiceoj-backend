@@ -15,6 +15,7 @@ import com.lhx.goodchoiceoj.model.entity.User;
 import com.lhx.goodchoiceoj.model.enums.QuestionSubmitLanguageEnum;
 import com.lhx.goodchoiceoj.model.enums.QuestionSubmitStatusEnum;
 import com.lhx.goodchoiceoj.model.vo.QuestionSubmitVO;
+import com.lhx.goodchoiceoj.rabbitMQ.MyMessageProducer;
 import com.lhx.goodchoiceoj.service.QuestionService;
 import com.lhx.goodchoiceoj.service.QuestionSubmitService;
 import com.lhx.goodchoiceoj.mapper.QuestionSubmitMapper;
@@ -50,8 +51,8 @@ public class QuestionSubmitServiceImpl extends ServiceImpl<QuestionSubmitMapper,
     @Lazy
     private JudgeService judgeService;
 
-//    @Resource
-//    private MyMessageProducer myMessageProducer;
+    @Resource
+    private MyMessageProducer myMessageProducer;
     /**
      * 提交题目
      *
@@ -90,11 +91,11 @@ public class QuestionSubmitServiceImpl extends ServiceImpl<QuestionSubmitMapper,
         }
         Long questionSubmitId = questionSubmit.getId();
         // 发送消息
-//        myMessageProducer.sendMessage("code_exchange", "my_routingKey", String.valueOf(questionSubmitId));
+        myMessageProducer.sendMessage("code_exchange", "my_routingKey", String.valueOf(questionSubmitId));
 //        // 执行判题服务
-        CompletableFuture.runAsync(() -> {
-            judgeService.doJudge(questionSubmitId);
-        });
+//        CompletableFuture.runAsync(() -> {
+//            judgeService.doJudge(questionSubmitId);
+//        });
         return questionSubmitId;
     }
 

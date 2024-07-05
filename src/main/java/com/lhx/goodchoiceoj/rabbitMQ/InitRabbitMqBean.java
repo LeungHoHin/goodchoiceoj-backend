@@ -13,7 +13,7 @@ import javax.annotation.PostConstruct;
  * 用于创建测试程序用到的交换机和队列（只用在程序启动前执行一次）
  */
 @Slf4j
-//@Component
+@Component
 public class InitRabbitMqBean {
 
     @Value("${spring.rabbitmq.host:106.53.68.162}")
@@ -23,13 +23,10 @@ public class InitRabbitMqBean {
     public void init() {
         try {
             ConnectionFactory factory = new ConnectionFactory();
-            factory.setHost("106.53.68.162");
+            factory.setHost("localhost");
             factory.setPort(5672);  // 一般默认端口为5672
-            factory.setUsername("LiangHaoxuan");
-            factory.setPassword("Lhx20021030!");
             factory.setAutomaticRecoveryEnabled(true);  // 开启Connection自动恢复功能
             factory.setNetworkRecoveryInterval(5000);
-            factory.setVirtualHost("/");
             factory.setConnectionTimeout(30 * 1000);
             factory.setHandshakeTimeout(30 * 1000);
             factory.setShutdownTimeout(0);

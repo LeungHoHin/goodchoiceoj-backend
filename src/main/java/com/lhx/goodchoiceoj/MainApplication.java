@@ -19,7 +19,7 @@ import com.lhx.goodchoiceoj.rabbitMQ.InitRabbitMq;
 public class MainApplication {
 
     public static void main(String[] args) {
-        //InitRabbitMq.doInit();
+//        InitRabbitMq.doInit();
         SpringApplication.run(MainApplication.class, args);
     }
 

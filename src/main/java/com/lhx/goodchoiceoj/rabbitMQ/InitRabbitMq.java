@@ -20,7 +20,7 @@ public class InitRabbitMq {
             factory.setPassword("Lhx20021030!");
             factory.setAutomaticRecoveryEnabled(true);  // 开启Connection自动恢复功能
             factory.setNetworkRecoveryInterval(5000);
-            factory.setVirtualHost("/");
+            factory.setVirtualHost("GoodChoiceOjVHost");
             factory.setConnectionTimeout(30 * 1000);
             factory.setHandshakeTimeout(30 * 1000);
             factory.setShutdownTimeout(0);

@@ -3,9 +3,8 @@ spring:
   rabbitmq:
     host: localhost
     port: 5672
-    password: root
-    username: root
-    virtual-host: /
+    password: admin
+    username: admin
   application:
     name: goodchoiceoj-backend
   # 默认 dev 环境
@@ -45,7 +44,6 @@ server:
   address: 0.0.0.0
   port: 8081
   servlet:
-    context-path: /api
     # cookie 30 天过期
     session:
       cookie:
@@ -62,3 +60,6 @@ mybatis-plus:
 #代码沙箱配置
 codesandbox:
   type: remote
+  address: http://192.168.126.132:8091/executeCode
+
+#代码沙箱地址

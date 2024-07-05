@@ -3,15 +3,10 @@ spring:
   rabbitmq:
     host: 106.53.68.162
     port: 5672
-    password: LiangHaoxuanAdmin
-    username: Lhx20021030!
-    virtual-host: /
+    password: Lhx20021030!
+    username: LiangHaoxuan
   application:
     name: goodchoiceoj-backend
-  # 默认 dev 环境
-  #  profiles:
-  #    active: dev
-  # 支持 swagger3
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
@@ -32,11 +27,6 @@ spring:
     host: 106.53.68.162
     port: 6379
     timeout: 50000
-    lettuce:
-      pool:
-        max-active: 8
-        max-idle: 8
-        min-idle: 0
     password: Lhx20021030!
   servlet:
     multipart:
@@ -62,3 +52,4 @@ mybatis-plus:
 #代码沙箱配置
 codesandbox:
   type: remote
+  address: http://106.53.68.162:8091/executeCode

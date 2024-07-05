@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 
-//@Component
+@Component
 @Slf4j
 public class MyMessageConsumer {
 

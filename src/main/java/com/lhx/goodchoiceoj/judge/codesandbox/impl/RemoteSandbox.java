@@ -8,6 +8,7 @@ import com.lhx.goodchoiceoj.exception.BusinessException;
 import com.lhx.goodchoiceoj.judge.codesandbox.CodeSandbox;
 import com.lhx.goodchoiceoj.judge.codesandbox.model.ExecuteCodeRequest;
 import com.lhx.goodchoiceoj.judge.codesandbox.model.ExecuteCodeResponse;
+import org.springframework.beans.factory.annotation.Value;
 
 public class RemoteSandbox implements CodeSandbox {
 
@@ -16,7 +17,12 @@ public class RemoteSandbox implements CodeSandbox {
 
     private static final String AUTH_REQUEST_SECRET = "LeungHohin";
 
-    private static final String REMOTE_SANDBOX_URL = "http://192.168.126.132:8091/executeCode";
+    private static String REMOTE_SANDBOX_URL;
+
+    @Value("${codesandbox.address}")
+    private void setRemoteSandboxUrl(String url) {
+        REMOTE_SANDBOX_URL = url;
+    }
 
 //    private static final String REMOTE_SANDBOX_URL = "http://106.53.68.162:8091/executeCode";
 
