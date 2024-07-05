@@ -1,7 +1,7 @@
 # 良好选OJ
 ![catLogo](https://github.com/LeungHoHin/goodchoiceoj-backend/assets/114863160/7b09a252-f3aa-44f9-b4eb-f912652d349c)
 
-线上地址：<http://goodchoiceoj.cn/>（还在备案中）
+线上地址：<http://goodchoiceoj.cn/>
           <http://106.53.68.162/>
 
 代码沙箱源码地址：<https://github.com/LeungHoHin/goodchoiceoj-code-sandbox>
